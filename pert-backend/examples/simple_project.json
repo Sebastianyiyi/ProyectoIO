@@ -1,0 +1,53 @@
+{
+  "activities": [
+    {
+      "id": "A",
+      "name": "Definir requerimientos",
+      "predecessors": [],
+      "a": 1,
+      "m": 2,
+      "b": 3
+    },
+    {
+      "id": "B",
+      "name": "Diseñar solución",
+      "predecessors": ["A"],
+      "a": 2,
+      "m": 3,
+      "b": 4
+    },
+    {
+      "id": "C",
+      "name": "Preparar documentación",
+      "predecessors": ["A"],
+      "a": 1,
+      "m": 2,
+      "b": 3
+    },
+    {
+      "id": "D",
+      "name": "Construir prototipo",
+      "predecessors": ["B", "C"],
+      "a": 1,
+      "m": 1,
+      "b": 1
+    },
+    {
+      "id": "E",
+      "name": "Desarrollar módulo principal",
+      "predecessors": ["B"],
+      "a": 1,
+      "m": 2,
+      "b": 9
+    },
+    {
+      "id": "F",
+      "name": "Integrar y probar",
+      "predecessors": ["D", "E"],
+      "a": 2,
+      "m": 3,
+      "b": 4
+    }
+  ],
+  "target_time": 13
+}
