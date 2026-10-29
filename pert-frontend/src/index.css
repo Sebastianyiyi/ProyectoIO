@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family:
+    "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.graph-canvas {
+  background-color: #f8fafc;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.aoa-node-label {
+  display: flex;
+  width: 66px;
+  height: 66px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: #0f172a;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.aoa-node-label__value {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.aoa-node-label__value--early {
+  color: #0369a1;
+}
+
+.aoa-node-label__value--late {
+  color: #6d28d9;
+}
+
+.aoa-node-label__event {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.aoa-node-label__value,
+.aoa-node-label__event {
+  background: rgb(255 255 255 / 0.72);
+  border-radius: 4px;
+  padding: 0 3px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: #cbd5e1;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
