@@ -24,7 +24,7 @@ describe('format helpers', () => {
   it('formats durations, decimals and probabilities', () => {
     expect(formatDuration(11)).toBe('11,0')
     expect(formatDecimal(1.23456)).toBe('1,2346')
-    expect(formatProbability(0.915666)).toBe('91.6%')
+    expect(formatProbability(0.915666)).toBe('91,6%')
     expect(formatProbability(null)).toBe('—')
   })
 

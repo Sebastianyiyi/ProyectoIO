@@ -72,7 +72,7 @@ describe('ProjectForm', () => {
     expect(props.onRemoveActivity).toHaveBeenCalledWith('k2')
   })
 
-  it('submits the form and shows general errors', () => {
+  it('submits the form without duplicating general errors inline', () => {
     const props = renderForm({
       fieldErrors: {
         general: ['Agrega al menos una actividad al proyecto.'],
@@ -81,10 +81,62 @@ describe('ProjectForm', () => {
     })
 
     expect(
-      screen.getByText('Agrega al menos una actividad al proyecto.'),
-    ).toBeInTheDocument()
+      screen.queryByText('Agrega al menos una actividad al proyecto.'),
+    ).not.toBeInTheDocument()
 
-    fireEvent.click(screen.getByRole('button', { name: /resolver/i }))
+    fireEvent.click(
+      screen.getByRole('button', { name: /ir al siguiente paso/i }),
+    )
     expect(props.onSolve).toHaveBeenCalledTimes(1)
+  })
+
+  it('opens predecessor options in a portal and selects them', () => {
+    const props = renderForm({
+      activities: [
+        {
+          key: 'k1',
+          id: 'A',
+          name: 'Inicio',
+          predecessors: [],
+          a: '1',
+          m: '2',
+          b: '3',
+        },
+        {
+          key: 'k2',
+          id: 'B',
+          name: 'Intermedia',
+          predecessors: ['A'],
+          a: '2',
+          m: '3',
+          b: '4',
+        },
+        {
+          key: 'k3',
+          id: 'C',
+          name: 'Final',
+          predecessors: [],
+          a: '3',
+          m: '4',
+          b: '5',
+        },
+      ],
+    })
+
+    const triggers = screen.getAllByTitle('Seleccionar predecesores')
+    fireEvent.click(triggers[2])
+
+    const listbox = screen.getByRole('listbox', { name: /predecesores/i })
+    expect(listbox.parentElement).toBe(document.body)
+
+    fireEvent.click(screen.getByRole('option', { name: 'A' }))
+    expect(props.onUpdateActivity).toHaveBeenCalledWith('k3', {
+      predecessors: ['A'],
+    })
+
+    fireEvent.keyDown(document, { key: 'Escape' })
+    expect(
+      screen.queryByRole('listbox', { name: /predecesores/i }),
+    ).not.toBeInTheDocument()
   })
 })
