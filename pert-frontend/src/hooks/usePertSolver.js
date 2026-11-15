@@ -82,9 +82,11 @@ export function usePertSolver() {
 
       setActivities(nextActivities)
       setTargetTime(nextTarget)
-      await runSolve(nextActivities, nextTarget)
+      const data = await runSolve(nextActivities, nextTarget)
+      return data
     } catch (requestError) {
       setError(requestError.message)
+      return null
     } finally {
       setExampleLoading(false)
     }

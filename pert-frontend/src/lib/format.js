@@ -46,10 +46,17 @@ export function formatProbability(value) {
   }
 
   const number = Number(value)
-  return Number.isFinite(number)
-    ? `${(number * 100).toFixed(1)}%`
-    : '—'
+  if (!Number.isFinite(number)) {
+    return '—'
+  }
+
+  return `${(number * 100).toLocaleString('es-CO', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  })}%`
 }
+
+export const formatPercent = formatProbability
 
 export function formatLabelValue(value) {
   return formatNumber(value)

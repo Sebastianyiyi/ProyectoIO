@@ -1,4 +1,11 @@
-export const ANIMATION_INTERVAL_MS = 1100
+export const ANIMATION_INTERVAL_MS = 2400
+export const ANIMATION_SPEED_MIN = 0.5
+export const ANIMATION_SPEED_MAX = 2
+export const ANIMATION_SPEED_STEP = 0.25
+export const ANIMATION_SPEED_DEFAULT = 1
+export const STEP_TOOLTIP_TYPING_MS = 900
+export const STEP_TOOLTIP_HOLD_MS = 1500
+export const STEP_TOOLTIP_FADE_MS = 300
 
 export const STEP_TYPES = {
   forward: {
