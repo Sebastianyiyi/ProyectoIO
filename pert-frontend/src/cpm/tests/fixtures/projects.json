@@ -1,0 +1,2835 @@
+{
+  "cpm": {
+    "request": {
+      "activities": [
+        {
+          "id": "A",
+          "name": "Actividad A",
+          "predecessors": [],
+          "duration": 3
+        },
+        {
+          "id": "C",
+          "name": "Actividad C",
+          "predecessors": [
+            "A"
+          ],
+          "duration": 2
+        },
+        {
+          "id": "B",
+          "name": "Actividad B",
+          "predecessors": [
+            "A"
+          ],
+          "duration": 4
+        },
+        {
+          "id": "D",
+          "name": "Actividad D",
+          "predecessors": [
+            "B",
+            "C"
+          ],
+          "duration": 5
+        }
+      ]
+    },
+    "result": {
+      "method": "cpm",
+      "project_duration": 12.0,
+      "activities": [
+        {
+          "id": "A",
+          "name": "Actividad A",
+          "predecessors": [],
+          "duration": 3.0,
+          "start_event": 1,
+          "end_event": 2,
+          "start_node_id": "n1",
+          "end_node_id": "n2",
+          "early_start": 0.0,
+          "early_finish": 3.0,
+          "late_start": 0.0,
+          "late_finish": 3.0,
+          "slack": 0.0,
+          "is_critical": true,
+          "slack_formula": "H(A) = L2 - E1 - D(A) = 3 - 0 - 3 = 0"
+        },
+        {
+          "id": "C",
+          "name": "Actividad C",
+          "predecessors": [
+            "A"
+          ],
+          "duration": 2.0,
+          "start_event": 2,
+          "end_event": 3,
+          "start_node_id": "n2",
+          "end_node_id": "n3",
+          "early_start": 3.0,
+          "early_finish": 5.0,
+          "late_start": 5.0,
+          "late_finish": 7.0,
+          "slack": 2.0,
+          "is_critical": false,
+          "slack_formula": "H(C) = L3 - E2 - D(C) = 7 - 3 - 2 = 2"
+        },
+        {
+          "id": "B",
+          "name": "Actividad B",
+          "predecessors": [
+            "A"
+          ],
+          "duration": 4.0,
+          "start_event": 2,
+          "end_event": 4,
+          "start_node_id": "n2",
+          "end_node_id": "n4",
+          "early_start": 3.0,
+          "early_finish": 7.0,
+          "late_start": 3.0,
+          "late_finish": 7.0,
+          "slack": 0.0,
+          "is_critical": true,
+          "slack_formula": "H(B) = L4 - E2 - D(B) = 7 - 3 - 4 = 0"
+        },
+        {
+          "id": "D",
+          "name": "Actividad D",
+          "predecessors": [
+            "B",
+            "C"
+          ],
+          "duration": 5.0,
+          "start_event": 4,
+          "end_event": 5,
+          "start_node_id": "n4",
+          "end_node_id": "n5",
+          "early_start": 7.0,
+          "early_finish": 12.0,
+          "late_start": 7.0,
+          "late_finish": 12.0,
+          "slack": 0.0,
+          "is_critical": true,
+          "slack_formula": "H(D) = L5 - E4 - D(D) = 12 - 7 - 5 = 0"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "event": 1,
+          "E": 0.0,
+          "L": 0.0,
+          "is_source": true,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 0,
+          "x": 80.0,
+          "y": 110.0
+        },
+        {
+          "id": "n2",
+          "event": 2,
+          "E": 3.0,
+          "L": 3.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 1,
+          "x": 310.0,
+          "y": 110.0
+        },
+        {
+          "id": "n3",
+          "event": 3,
+          "E": 5.0,
+          "L": 7.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": false,
+          "rank": 2,
+          "x": 540.0,
+          "y": 110.0
+        },
+        {
+          "id": "n4",
+          "event": 4,
+          "E": 7.0,
+          "L": 7.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 3,
+          "x": 770.0,
+          "y": 110.0
+        },
+        {
+          "id": "n5",
+          "event": 5,
+          "E": 12.0,
+          "L": 12.0,
+          "is_source": false,
+          "is_sink": true,
+          "is_critical": true,
+          "rank": 4,
+          "x": 1000.0,
+          "y": 110.0
+        }
+      ],
+      "edges": [
+        {
+          "id": "act_A",
+          "source": "n1",
+          "target": "n2",
+          "activity_id": "A",
+          "name": "Actividad A",
+          "label": "A (3.00)",
+          "duration": 3.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 0.0,
+          "is_critical": true
+        },
+        {
+          "id": "act_C",
+          "source": "n2",
+          "target": "n3",
+          "activity_id": "C",
+          "name": "Actividad C",
+          "label": "C (2.00)",
+          "duration": 2.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 2.0,
+          "is_critical": false
+        },
+        {
+          "id": "act_B",
+          "source": "n2",
+          "target": "n4",
+          "activity_id": "B",
+          "name": "Actividad B",
+          "label": "B (4.00)",
+          "duration": 4.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 0.0,
+          "is_critical": true
+        },
+        {
+          "id": "dummy_1",
+          "source": "n3",
+          "target": "n4",
+          "activity_id": null,
+          "name": null,
+          "label": "f1 (0.00)",
+          "duration": 0.0,
+          "is_dummy": true,
+          "dummy_label": "f1",
+          "slack": 2.0,
+          "is_critical": false
+        },
+        {
+          "id": "act_D",
+          "source": "n4",
+          "target": "n5",
+          "activity_id": "D",
+          "name": "Actividad D",
+          "label": "D (5.00)",
+          "duration": 5.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 0.0,
+          "is_critical": true
+        }
+      ],
+      "critical_path": [
+        "A",
+        "B",
+        "D"
+      ],
+      "critical_paths": [
+        [
+          "A",
+          "B",
+          "D"
+        ]
+      ],
+      "critical_paths_truncated": false,
+      "critical_activities": [
+        "A",
+        "B",
+        "D"
+      ],
+      "steps": [
+        {
+          "index": 0,
+          "type": "forward",
+          "node_id": "n1",
+          "formula": "E1 = 0.00",
+          "explanation": "El evento 1 es el inicio del proyecto; por definición su tiempo temprano es 0.00.",
+          "labels": {
+            "E": 0.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n1": 0.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1"
+          ],
+          "highlight_edges": [],
+          "snapshot": {
+            "E": {
+              "n1": 0.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 1,
+          "type": "forward",
+          "node_id": "n2",
+          "formula": "E2 = max(E1 + 3.00) = 3.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 2 (A desde el evento 1). El paso adelante toma el máximo, por lo que E2 = 3.00.",
+          "labels": {
+            "E": 3.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n2": 3.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n2",
+            "n1"
+          ],
+          "highlight_edges": [
+            "act_A"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 2,
+          "type": "forward",
+          "node_id": "n3",
+          "formula": "E3 = max(E2 + 2.00) = 5.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 3 (C desde el evento 2). El paso adelante toma el máximo, por lo que E3 = 5.00.",
+          "labels": {
+            "E": 5.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n3": 5.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n3",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_C"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 3,
+          "type": "forward",
+          "node_id": "n4",
+          "formula": "E4 = max(E2 + 4.00, E3 + 0.00) = 7.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 4 (B desde el evento 2; f1 desde el evento 3). El paso adelante toma el máximo, por lo que E4 = 7.00.",
+          "labels": {
+            "E": 7.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n4": 7.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n4",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_B"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 4,
+          "type": "forward",
+          "node_id": "n5",
+          "formula": "E5 = max(E4 + 5.00) = 12.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 5 (D desde el evento 4). El paso adelante toma el máximo, por lo que E5 = 12.00.",
+          "labels": {
+            "E": 12.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n5": 12.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n5",
+            "n4"
+          ],
+          "highlight_edges": [
+            "act_D"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 5,
+          "type": "backward",
+          "node_id": "n5",
+          "formula": "L5 = E5 = 12.00",
+          "explanation": "El evento 5 es el final del proyecto y no tiene salidas; por ello conserva el tiempo temprano: L5 = 12.00.",
+          "labels": {
+            "E": null,
+            "L": 12.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n5": 12.0
+            }
+          },
+          "highlight_nodes": [
+            "n5"
+          ],
+          "highlight_edges": [],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {
+              "n5": 12.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 6,
+          "type": "backward",
+          "node_id": "n4",
+          "formula": "L4 = min(L5 - 5.00) = 7.00",
+          "explanation": "Se evalúan los arcos de salida del evento 4 (D hacia el evento 5). El paso atrás toma el mínimo, por lo que L4 = 7.00.",
+          "labels": {
+            "E": null,
+            "L": 7.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n4": 7.0
+            }
+          },
+          "highlight_nodes": [
+            "n4",
+            "n5"
+          ],
+          "highlight_edges": [
+            "act_D"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 7,
+          "type": "backward",
+          "node_id": "n3",
+          "formula": "L3 = min(L4 - 0.00) = 7.00",
+          "explanation": "Se evalúan los arcos de salida del evento 3 (f1 hacia el evento 4). El paso atrás toma el mínimo, por lo que L3 = 7.00.",
+          "labels": {
+            "E": null,
+            "L": 7.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n3": 7.0
+            }
+          },
+          "highlight_nodes": [
+            "n3",
+            "n4"
+          ],
+          "highlight_edges": [
+            "dummy_1"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {
+              "n3": 7.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 8,
+          "type": "backward",
+          "node_id": "n2",
+          "formula": "L2 = min(L3 - 2.00, L4 - 4.00) = 3.00",
+          "explanation": "Se evalúan los arcos de salida del evento 2 (C hacia el evento 3; B hacia el evento 4). El paso atrás toma el mínimo, por lo que L2 = 3.00.",
+          "labels": {
+            "E": null,
+            "L": 3.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n2": 3.0
+            }
+          },
+          "highlight_nodes": [
+            "n2",
+            "n4"
+          ],
+          "highlight_edges": [
+            "act_B"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {
+              "n2": 3.0,
+              "n3": 7.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 9,
+          "type": "backward",
+          "node_id": "n1",
+          "formula": "L1 = min(L2 - 3.00) = 0.00",
+          "explanation": "Se evalúan los arcos de salida del evento 1 (A hacia el evento 2). El paso atrás toma el mínimo, por lo que L1 = 0.00.",
+          "labels": {
+            "E": null,
+            "L": 0.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n1": 0.0
+            }
+          },
+          "highlight_nodes": [
+            "n1",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_A"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 7.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 10,
+          "type": "critical",
+          "node_id": "n2",
+          "formula": "H(A) = L2 - E1 - 3.00 = 0.00",
+          "explanation": "La actividad A tiene holgura cero, por lo que no puede retrasarse sin afectar la duración total del proyecto y pertenece a la ruta crítica.",
+          "labels": {
+            "E": 0.0,
+            "L": 3.0
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_A"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 7.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n4",
+              "n5"
+            ],
+            "critical_edges": [
+              "act_A",
+              "act_B",
+              "act_D"
+            ]
+          }
+        },
+        {
+          "index": 11,
+          "type": "critical",
+          "node_id": "n4",
+          "formula": "H(B) = L4 - E2 - 4.00 = 0.00",
+          "explanation": "La actividad B tiene holgura cero, por lo que no puede retrasarse sin afectar la duración total del proyecto y pertenece a la ruta crítica.",
+          "labels": {
+            "E": 3.0,
+            "L": 7.0
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n2",
+            "n4"
+          ],
+          "highlight_edges": [
+            "act_B"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 7.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n4",
+              "n5"
+            ],
+            "critical_edges": [
+              "act_A",
+              "act_B",
+              "act_D"
+            ]
+          }
+        },
+        {
+          "index": 12,
+          "type": "critical",
+          "node_id": "n5",
+          "formula": "H(D) = L5 - E4 - 5.00 = 0.00",
+          "explanation": "La actividad D tiene holgura cero, por lo que no puede retrasarse sin afectar la duración total del proyecto y pertenece a la ruta crítica.",
+          "labels": {
+            "E": 7.0,
+            "L": 12.0
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n4",
+            "n5"
+          ],
+          "highlight_edges": [
+            "act_D"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 7.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n4",
+              "n5"
+            ],
+            "critical_edges": [
+              "act_A",
+              "act_B",
+              "act_D"
+            ]
+          }
+        },
+        {
+          "index": 13,
+          "type": "critical",
+          "node_id": null,
+          "formula": "Ruta crítica: A -> B -> D (duración = 12.00)",
+          "explanation": "El conjunto de actividades con holgura cero forma la ruta crítica. Cualquier retraso en estas actividades incrementa la duración total del proyecto.",
+          "labels": {
+            "E": null,
+            "L": null
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1",
+            "n2",
+            "n4",
+            "n5"
+          ],
+          "highlight_edges": [
+            "act_A",
+            "act_B",
+            "act_D"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 7.0,
+              "n4": 7.0,
+              "n5": 12.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n4",
+              "n5"
+            ],
+            "critical_edges": [
+              "act_A",
+              "act_B",
+              "act_D"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "multiple": {
+    "request": {
+      "activities": [
+        {
+          "id": "A",
+          "duration": 3
+        },
+        {
+          "id": "B",
+          "duration": 3
+        }
+      ]
+    },
+    "result": {
+      "method": "cpm",
+      "project_duration": 3.0,
+      "activities": [
+        {
+          "id": "A",
+          "name": "A",
+          "predecessors": [],
+          "duration": 3.0,
+          "start_event": 1,
+          "end_event": 3,
+          "start_node_id": "n1",
+          "end_node_id": "n3",
+          "early_start": 0.0,
+          "early_finish": 3.0,
+          "late_start": 0.0,
+          "late_finish": 3.0,
+          "slack": 0.0,
+          "is_critical": true,
+          "slack_formula": "H(A) = L3 - E1 - D(A) = 3 - 0 - 3 = 0"
+        },
+        {
+          "id": "B",
+          "name": "B",
+          "predecessors": [],
+          "duration": 3.0,
+          "start_event": 1,
+          "end_event": 2,
+          "start_node_id": "n1",
+          "end_node_id": "n2",
+          "early_start": 0.0,
+          "early_finish": 3.0,
+          "late_start": 0.0,
+          "late_finish": 3.0,
+          "slack": 0.0,
+          "is_critical": true,
+          "slack_formula": "H(B) = L2 - E1 - D(B) = 3 - 0 - 3 = 0"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "event": 1,
+          "E": 0.0,
+          "L": 0.0,
+          "is_source": true,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 0,
+          "x": 80.0,
+          "y": 110.0
+        },
+        {
+          "id": "n2",
+          "event": 2,
+          "E": 3.0,
+          "L": 3.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 1,
+          "x": 310.0,
+          "y": 110.0
+        },
+        {
+          "id": "n3",
+          "event": 3,
+          "E": 3.0,
+          "L": 3.0,
+          "is_source": false,
+          "is_sink": true,
+          "is_critical": true,
+          "rank": 2,
+          "x": 540.0,
+          "y": 110.0
+        }
+      ],
+      "edges": [
+        {
+          "id": "act_B",
+          "source": "n1",
+          "target": "n2",
+          "activity_id": "B",
+          "name": null,
+          "label": "B (3.00)",
+          "duration": 3.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 0.0,
+          "is_critical": true
+        },
+        {
+          "id": "act_A",
+          "source": "n1",
+          "target": "n3",
+          "activity_id": "A",
+          "name": null,
+          "label": "A (3.00)",
+          "duration": 3.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 0.0,
+          "is_critical": true
+        },
+        {
+          "id": "dummy_1",
+          "source": "n2",
+          "target": "n3",
+          "activity_id": null,
+          "name": null,
+          "label": "f1 (0.00)",
+          "duration": 0.0,
+          "is_dummy": true,
+          "dummy_label": "f1",
+          "slack": 0.0,
+          "is_critical": true
+        }
+      ],
+      "critical_path": [
+        "B"
+      ],
+      "critical_paths": [
+        [
+          "B"
+        ],
+        [
+          "A"
+        ]
+      ],
+      "critical_paths_truncated": false,
+      "critical_activities": [
+        "A",
+        "B"
+      ],
+      "steps": [
+        {
+          "index": 0,
+          "type": "forward",
+          "node_id": "n1",
+          "formula": "E1 = 0.00",
+          "explanation": "El evento 1 es el inicio del proyecto; por definición su tiempo temprano es 0.00.",
+          "labels": {
+            "E": 0.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n1": 0.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1"
+          ],
+          "highlight_edges": [],
+          "snapshot": {
+            "E": {
+              "n1": 0.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 1,
+          "type": "forward",
+          "node_id": "n2",
+          "formula": "E2 = max(E1 + 3.00) = 3.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 2 (B desde el evento 1). El paso adelante toma el máximo, por lo que E2 = 3.00.",
+          "labels": {
+            "E": 3.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n2": 3.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n2",
+            "n1"
+          ],
+          "highlight_edges": [
+            "act_B"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 2,
+          "type": "forward",
+          "node_id": "n3",
+          "formula": "E3 = max(E1 + 3.00, E2 + 0.00) = 3.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 3 (A desde el evento 1; f1 desde el evento 2). El paso adelante toma el máximo, por lo que E3 = 3.00.",
+          "labels": {
+            "E": 3.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n3": 3.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n3",
+            "n1",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_A",
+            "dummy_1"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 3,
+          "type": "backward",
+          "node_id": "n3",
+          "formula": "L3 = E3 = 3.00",
+          "explanation": "El evento 3 es el final del proyecto y no tiene salidas; por ello conserva el tiempo temprano: L3 = 3.00.",
+          "labels": {
+            "E": null,
+            "L": 3.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n3": 3.0
+            }
+          },
+          "highlight_nodes": [
+            "n3"
+          ],
+          "highlight_edges": [],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "L": {
+              "n3": 3.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 4,
+          "type": "backward",
+          "node_id": "n2",
+          "formula": "L2 = min(L3 - 0.00) = 3.00",
+          "explanation": "Se evalúan los arcos de salida del evento 2 (f1 hacia el evento 3). El paso atrás toma el mínimo, por lo que L2 = 3.00.",
+          "labels": {
+            "E": null,
+            "L": 3.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n2": 3.0
+            }
+          },
+          "highlight_nodes": [
+            "n2",
+            "n3"
+          ],
+          "highlight_edges": [
+            "dummy_1"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "L": {
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 5,
+          "type": "backward",
+          "node_id": "n1",
+          "formula": "L1 = min(L2 - 3.00, L3 - 3.00) = 0.00",
+          "explanation": "Se evalúan los arcos de salida del evento 1 (B hacia el evento 2; A hacia el evento 3). El paso atrás toma el mínimo, por lo que L1 = 0.00.",
+          "labels": {
+            "E": null,
+            "L": 0.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n1": 0.0
+            }
+          },
+          "highlight_nodes": [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          "highlight_edges": [
+            "act_B",
+            "act_A"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 6,
+          "type": "critical",
+          "node_id": "n3",
+          "formula": "H(A) = L3 - E1 - 3.00 = 0.00",
+          "explanation": "La actividad A tiene holgura cero, por lo que no puede retrasarse sin afectar la duración total del proyecto y pertenece a la ruta crítica.",
+          "labels": {
+            "E": 0.0,
+            "L": 3.0
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1",
+            "n3"
+          ],
+          "highlight_edges": [
+            "act_A"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n3"
+            ],
+            "critical_edges": [
+              "act_B",
+              "act_A",
+              "dummy_1"
+            ]
+          }
+        },
+        {
+          "index": 7,
+          "type": "critical",
+          "node_id": "n2",
+          "formula": "H(B) = L2 - E1 - 3.00 = 0.00",
+          "explanation": "La actividad B tiene holgura cero, por lo que no puede retrasarse sin afectar la duración total del proyecto y pertenece a la ruta crítica.",
+          "labels": {
+            "E": 0.0,
+            "L": 3.0
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_B"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n3"
+            ],
+            "critical_edges": [
+              "act_B",
+              "act_A",
+              "dummy_1"
+            ]
+          }
+        },
+        {
+          "index": 8,
+          "type": "critical",
+          "node_id": null,
+          "formula": "Ruta crítica: B (duración = 3.00)",
+          "explanation": "El conjunto de actividades con holgura cero forma la ruta crítica. Cualquier retraso en estas actividades incrementa la duración total del proyecto.",
+          "labels": {
+            "E": null,
+            "L": null
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          "highlight_edges": [
+            "act_B",
+            "act_A",
+            "dummy_1"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 3.0,
+              "n3": 3.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n3"
+            ],
+            "critical_edges": [
+              "act_B",
+              "act_A",
+              "dummy_1"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "pert": {
+    "request": {
+      "activities": [
+        {
+          "id": "A",
+          "name": "Definir requerimientos",
+          "predecessors": [],
+          "a": 1,
+          "m": 2,
+          "b": 3
+        },
+        {
+          "id": "B",
+          "name": "Diseñar solución",
+          "predecessors": [
+            "A"
+          ],
+          "a": 2,
+          "m": 3,
+          "b": 4
+        },
+        {
+          "id": "C",
+          "name": "Preparar documentación",
+          "predecessors": [
+            "A"
+          ],
+          "a": 1,
+          "m": 2,
+          "b": 3
+        },
+        {
+          "id": "D",
+          "name": "Construir prototipo",
+          "predecessors": [
+            "B",
+            "C"
+          ],
+          "a": 1,
+          "m": 1,
+          "b": 1
+        },
+        {
+          "id": "E",
+          "name": "Desarrollar módulo principal",
+          "predecessors": [
+            "B"
+          ],
+          "a": 1,
+          "m": 2,
+          "b": 9
+        },
+        {
+          "id": "F",
+          "name": "Integrar y probar",
+          "predecessors": [
+            "D",
+            "E"
+          ],
+          "a": 2,
+          "m": 3,
+          "b": 4
+        }
+      ],
+      "target_time": 13
+    },
+    "result": {
+      "project_duration": 11.0,
+      "activities": [
+        {
+          "id": "A",
+          "name": "Definir requerimientos",
+          "predecessors": [],
+          "a": 1.0,
+          "m": 2.0,
+          "b": 3.0,
+          "expected_time": 2.0,
+          "variance": 0.111111,
+          "start_event": 1,
+          "end_event": 2,
+          "start_node_id": "n1",
+          "end_node_id": "n2",
+          "slack": 0.0,
+          "is_critical": true,
+          "expected_time_formula": "te(A) = (1 + 4(2) + 3) / 6 = 2.0000",
+          "variance_formula": "Var(A) = ((3 - 1) / 6)^2 = 0.1111",
+          "slack_formula": "H(A) = L2 - E1 - 2.00 = 0.00"
+        },
+        {
+          "id": "B",
+          "name": "Diseñar solución",
+          "predecessors": [
+            "A"
+          ],
+          "a": 2.0,
+          "m": 3.0,
+          "b": 4.0,
+          "expected_time": 3.0,
+          "variance": 0.111111,
+          "start_event": 2,
+          "end_event": 3,
+          "start_node_id": "n2",
+          "end_node_id": "n3",
+          "slack": 0.0,
+          "is_critical": true,
+          "expected_time_formula": "te(B) = (2 + 4(3) + 4) / 6 = 3.0000",
+          "variance_formula": "Var(B) = ((4 - 2) / 6)^2 = 0.1111",
+          "slack_formula": "H(B) = L3 - E2 - 3.00 = 0.00"
+        },
+        {
+          "id": "C",
+          "name": "Preparar documentación",
+          "predecessors": [
+            "A"
+          ],
+          "a": 1.0,
+          "m": 2.0,
+          "b": 3.0,
+          "expected_time": 2.0,
+          "variance": 0.111111,
+          "start_event": 2,
+          "end_event": 4,
+          "start_node_id": "n2",
+          "end_node_id": "n4",
+          "slack": 3.0,
+          "is_critical": false,
+          "expected_time_formula": "te(C) = (1 + 4(2) + 3) / 6 = 2.0000",
+          "variance_formula": "Var(C) = ((3 - 1) / 6)^2 = 0.1111",
+          "slack_formula": "H(C) = L4 - E2 - 2.00 = 3.00"
+        },
+        {
+          "id": "D",
+          "name": "Construir prototipo",
+          "predecessors": [
+            "B",
+            "C"
+          ],
+          "a": 1.0,
+          "m": 1.0,
+          "b": 1.0,
+          "expected_time": 1.0,
+          "variance": 0.0,
+          "start_event": 5,
+          "end_event": 6,
+          "start_node_id": "n5",
+          "end_node_id": "n6",
+          "slack": 2.0,
+          "is_critical": false,
+          "expected_time_formula": "te(D) = (1 + 4(1) + 1) / 6 = 1.0000",
+          "variance_formula": "Var(D) = ((1 - 1) / 6)^2 = 0.0000",
+          "slack_formula": "H(D) = L6 - E5 - 1.00 = 2.00"
+        },
+        {
+          "id": "E",
+          "name": "Desarrollar módulo principal",
+          "predecessors": [
+            "B"
+          ],
+          "a": 1.0,
+          "m": 2.0,
+          "b": 9.0,
+          "expected_time": 3.0,
+          "variance": 1.777778,
+          "start_event": 3,
+          "end_event": 7,
+          "start_node_id": "n3",
+          "end_node_id": "n7",
+          "slack": 0.0,
+          "is_critical": true,
+          "expected_time_formula": "te(E) = (1 + 4(2) + 9) / 6 = 3.0000",
+          "variance_formula": "Var(E) = ((9 - 1) / 6)^2 = 1.7778",
+          "slack_formula": "H(E) = L7 - E3 - 3.00 = 0.00"
+        },
+        {
+          "id": "F",
+          "name": "Integrar y probar",
+          "predecessors": [
+            "D",
+            "E"
+          ],
+          "a": 2.0,
+          "m": 3.0,
+          "b": 4.0,
+          "expected_time": 3.0,
+          "variance": 0.111111,
+          "start_event": 8,
+          "end_event": 9,
+          "start_node_id": "n8",
+          "end_node_id": "n9",
+          "slack": 0.0,
+          "is_critical": true,
+          "expected_time_formula": "te(F) = (2 + 4(3) + 4) / 6 = 3.0000",
+          "variance_formula": "Var(F) = ((4 - 2) / 6)^2 = 0.1111",
+          "slack_formula": "H(F) = L9 - E8 - 3.00 = 0.00"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "event": 1,
+          "E": 0.0,
+          "L": 0.0,
+          "is_source": true,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 0,
+          "x": 80.0,
+          "y": 110.0
+        },
+        {
+          "id": "n2",
+          "event": 2,
+          "E": 2.0,
+          "L": 2.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 1,
+          "x": 310.0,
+          "y": 110.0
+        },
+        {
+          "id": "n3",
+          "event": 3,
+          "E": 5.0,
+          "L": 5.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 2,
+          "x": 540.0,
+          "y": 110.0
+        },
+        {
+          "id": "n4",
+          "event": 4,
+          "E": 4.0,
+          "L": 7.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": false,
+          "rank": 2,
+          "x": 540.0,
+          "y": 240.0
+        },
+        {
+          "id": "n5",
+          "event": 5,
+          "E": 5.0,
+          "L": 7.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": false,
+          "rank": 3,
+          "x": 770.0,
+          "y": 110.0
+        },
+        {
+          "id": "n6",
+          "event": 6,
+          "E": 6.0,
+          "L": 8.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": false,
+          "rank": 4,
+          "x": 1000.0,
+          "y": 110.0
+        },
+        {
+          "id": "n7",
+          "event": 7,
+          "E": 8.0,
+          "L": 8.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 3,
+          "x": 770.0,
+          "y": 240.0
+        },
+        {
+          "id": "n8",
+          "event": 8,
+          "E": 8.0,
+          "L": 8.0,
+          "is_source": false,
+          "is_sink": false,
+          "is_critical": true,
+          "rank": 5,
+          "x": 1230.0,
+          "y": 110.0
+        },
+        {
+          "id": "n9",
+          "event": 9,
+          "E": 11.0,
+          "L": 11.0,
+          "is_source": false,
+          "is_sink": true,
+          "is_critical": true,
+          "rank": 6,
+          "x": 1460.0,
+          "y": 110.0
+        }
+      ],
+      "edges": [
+        {
+          "id": "act_A",
+          "source": "n1",
+          "target": "n2",
+          "activity_id": "A",
+          "name": "Definir requerimientos",
+          "label": "A (2.00)",
+          "duration": 2.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 0.0,
+          "is_critical": true
+        },
+        {
+          "id": "act_B",
+          "source": "n2",
+          "target": "n3",
+          "activity_id": "B",
+          "name": "Diseñar solución",
+          "label": "B (3.00)",
+          "duration": 3.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 0.0,
+          "is_critical": true
+        },
+        {
+          "id": "act_C",
+          "source": "n2",
+          "target": "n4",
+          "activity_id": "C",
+          "name": "Preparar documentación",
+          "label": "C (2.00)",
+          "duration": 2.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 3.0,
+          "is_critical": false
+        },
+        {
+          "id": "dummy_1",
+          "source": "n3",
+          "target": "n5",
+          "activity_id": null,
+          "name": null,
+          "label": "f1 (0.00)",
+          "duration": 0.0,
+          "is_dummy": true,
+          "dummy_label": "f1",
+          "slack": 2.0,
+          "is_critical": false
+        },
+        {
+          "id": "act_E",
+          "source": "n3",
+          "target": "n7",
+          "activity_id": "E",
+          "name": "Desarrollar módulo principal",
+          "label": "E (3.00)",
+          "duration": 3.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 0.0,
+          "is_critical": true
+        },
+        {
+          "id": "dummy_2",
+          "source": "n4",
+          "target": "n5",
+          "activity_id": null,
+          "name": null,
+          "label": "f2 (0.00)",
+          "duration": 0.0,
+          "is_dummy": true,
+          "dummy_label": "f2",
+          "slack": 3.0,
+          "is_critical": false
+        },
+        {
+          "id": "act_D",
+          "source": "n5",
+          "target": "n6",
+          "activity_id": "D",
+          "name": "Construir prototipo",
+          "label": "D (1.00)",
+          "duration": 1.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 2.0,
+          "is_critical": false
+        },
+        {
+          "id": "dummy_3",
+          "source": "n6",
+          "target": "n8",
+          "activity_id": null,
+          "name": null,
+          "label": "f3 (0.00)",
+          "duration": 0.0,
+          "is_dummy": true,
+          "dummy_label": "f3",
+          "slack": 2.0,
+          "is_critical": false
+        },
+        {
+          "id": "dummy_4",
+          "source": "n7",
+          "target": "n8",
+          "activity_id": null,
+          "name": null,
+          "label": "f4 (0.00)",
+          "duration": 0.0,
+          "is_dummy": true,
+          "dummy_label": "f4",
+          "slack": 0.0,
+          "is_critical": true
+        },
+        {
+          "id": "act_F",
+          "source": "n8",
+          "target": "n9",
+          "activity_id": "F",
+          "name": "Integrar y probar",
+          "label": "F (3.00)",
+          "duration": 3.0,
+          "is_dummy": false,
+          "dummy_label": null,
+          "slack": 0.0,
+          "is_critical": true
+        }
+      ],
+      "critical_path": [
+        "A",
+        "B",
+        "E",
+        "F"
+      ],
+      "critical_activities": [
+        "A",
+        "B",
+        "E",
+        "F"
+      ],
+      "probability": {
+        "target_time": 13.0,
+        "mean": 11.0,
+        "critical_variance": 2.111111,
+        "standard_deviation": 1.452966,
+        "z_score": 1.376494,
+        "probability": 0.915666,
+        "formula": "Z = (13 - 11.00) / 1.4530 = 1.3765; P(T <= 13) = 0.9157."
+      },
+      "steps": [
+        {
+          "index": 0,
+          "type": "forward",
+          "node_id": "n1",
+          "formula": "E1 = 0.00",
+          "explanation": "El evento 1 es el inicio del proyecto; por definición su tiempo temprano es 0.00.",
+          "labels": {
+            "E": 0.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n1": 0.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1"
+          ],
+          "highlight_edges": [],
+          "snapshot": {
+            "E": {
+              "n1": 0.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 1,
+          "type": "forward",
+          "node_id": "n2",
+          "formula": "E2 = max(E1 + 2.00) = 2.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 2 (A desde el evento 1). El paso adelante toma el máximo, por lo que E2 = 2.00.",
+          "labels": {
+            "E": 2.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n2": 2.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n2",
+            "n1"
+          ],
+          "highlight_edges": [
+            "act_A"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 2,
+          "type": "forward",
+          "node_id": "n3",
+          "formula": "E3 = max(E2 + 3.00) = 5.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 3 (B desde el evento 2). El paso adelante toma el máximo, por lo que E3 = 5.00.",
+          "labels": {
+            "E": 5.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n3": 5.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n3",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_B"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 3,
+          "type": "forward",
+          "node_id": "n4",
+          "formula": "E4 = max(E2 + 2.00) = 4.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 4 (C desde el evento 2). El paso adelante toma el máximo, por lo que E4 = 4.00.",
+          "labels": {
+            "E": 4.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n4": 4.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n4",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_C"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 4,
+          "type": "forward",
+          "node_id": "n5",
+          "formula": "E5 = max(E3 + 0.00, E4 + 0.00) = 5.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 5 (f1 desde el evento 3; f2 desde el evento 4). El paso adelante toma el máximo, por lo que E5 = 5.00.",
+          "labels": {
+            "E": 5.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n5": 5.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n5",
+            "n3"
+          ],
+          "highlight_edges": [
+            "dummy_1"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 5,
+          "type": "forward",
+          "node_id": "n6",
+          "formula": "E6 = max(E5 + 1.00) = 6.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 6 (D desde el evento 5). El paso adelante toma el máximo, por lo que E6 = 6.00.",
+          "labels": {
+            "E": 6.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n6": 6.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n6",
+            "n5"
+          ],
+          "highlight_edges": [
+            "act_D"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 6,
+          "type": "forward",
+          "node_id": "n7",
+          "formula": "E7 = max(E3 + 3.00) = 8.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 7 (E desde el evento 3). El paso adelante toma el máximo, por lo que E7 = 8.00.",
+          "labels": {
+            "E": 8.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n7": 8.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n7",
+            "n3"
+          ],
+          "highlight_edges": [
+            "act_E"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 7,
+          "type": "forward",
+          "node_id": "n8",
+          "formula": "E8 = max(E6 + 0.00, E7 + 0.00) = 8.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 8 (f3 desde el evento 6; f4 desde el evento 7). El paso adelante toma el máximo, por lo que E8 = 8.00.",
+          "labels": {
+            "E": 8.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n8": 8.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n8",
+            "n7"
+          ],
+          "highlight_edges": [
+            "dummy_4"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 8,
+          "type": "forward",
+          "node_id": "n9",
+          "formula": "E9 = max(E8 + 3.00) = 11.00",
+          "explanation": "Se evalúan los arcos de entrada del evento 9 (F desde el evento 8). El paso adelante toma el máximo, por lo que E9 = 11.00.",
+          "labels": {
+            "E": 11.0,
+            "L": null
+          },
+          "updates": {
+            "E": {
+              "n9": 11.0
+            },
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n9",
+            "n8"
+          ],
+          "highlight_edges": [
+            "act_F"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {},
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 9,
+          "type": "backward",
+          "node_id": "n9",
+          "formula": "L9 = E9 = 11.00",
+          "explanation": "El evento 9 es el final del proyecto y no tiene salidas; por ello conserva el tiempo temprano: L9 = 11.00.",
+          "labels": {
+            "E": null,
+            "L": 11.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n9": 11.0
+            }
+          },
+          "highlight_nodes": [
+            "n9"
+          ],
+          "highlight_edges": [],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n9": 11.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 10,
+          "type": "backward",
+          "node_id": "n8",
+          "formula": "L8 = min(L9 - 3.00) = 8.00",
+          "explanation": "Se evalúan los arcos de salida del evento 8 (F hacia el evento 9). El paso atrás toma el mínimo, por lo que L8 = 8.00.",
+          "labels": {
+            "E": null,
+            "L": 8.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n8": 8.0
+            }
+          },
+          "highlight_nodes": [
+            "n8",
+            "n9"
+          ],
+          "highlight_edges": [
+            "act_F"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 11,
+          "type": "backward",
+          "node_id": "n7",
+          "formula": "L7 = min(L8 - 0.00) = 8.00",
+          "explanation": "Se evalúan los arcos de salida del evento 7 (f4 hacia el evento 8). El paso atrás toma el mínimo, por lo que L7 = 8.00.",
+          "labels": {
+            "E": null,
+            "L": 8.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n7": 8.0
+            }
+          },
+          "highlight_nodes": [
+            "n7",
+            "n8"
+          ],
+          "highlight_edges": [
+            "dummy_4"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 12,
+          "type": "backward",
+          "node_id": "n6",
+          "formula": "L6 = min(L8 - 0.00) = 8.00",
+          "explanation": "Se evalúan los arcos de salida del evento 6 (f3 hacia el evento 8). El paso atrás toma el mínimo, por lo que L6 = 8.00.",
+          "labels": {
+            "E": null,
+            "L": 8.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n6": 8.0
+            }
+          },
+          "highlight_nodes": [
+            "n6",
+            "n8"
+          ],
+          "highlight_edges": [
+            "dummy_3"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 13,
+          "type": "backward",
+          "node_id": "n5",
+          "formula": "L5 = min(L6 - 1.00) = 7.00",
+          "explanation": "Se evalúan los arcos de salida del evento 5 (D hacia el evento 6). El paso atrás toma el mínimo, por lo que L5 = 7.00.",
+          "labels": {
+            "E": null,
+            "L": 7.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n5": 7.0
+            }
+          },
+          "highlight_nodes": [
+            "n5",
+            "n6"
+          ],
+          "highlight_edges": [
+            "act_D"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 14,
+          "type": "backward",
+          "node_id": "n4",
+          "formula": "L4 = min(L5 - 0.00) = 7.00",
+          "explanation": "Se evalúan los arcos de salida del evento 4 (f2 hacia el evento 5). El paso atrás toma el mínimo, por lo que L4 = 7.00.",
+          "labels": {
+            "E": null,
+            "L": 7.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n4": 7.0
+            }
+          },
+          "highlight_nodes": [
+            "n4",
+            "n5"
+          ],
+          "highlight_edges": [
+            "dummy_2"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n4": 7.0,
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 15,
+          "type": "backward",
+          "node_id": "n3",
+          "formula": "L3 = min(L5 - 0.00, L7 - 3.00) = 5.00",
+          "explanation": "Se evalúan los arcos de salida del evento 3 (f1 hacia el evento 5; E hacia el evento 7). El paso atrás toma el mínimo, por lo que L3 = 5.00.",
+          "labels": {
+            "E": null,
+            "L": 5.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n3": 5.0
+            }
+          },
+          "highlight_nodes": [
+            "n3",
+            "n7"
+          ],
+          "highlight_edges": [
+            "act_E"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 16,
+          "type": "backward",
+          "node_id": "n2",
+          "formula": "L2 = min(L3 - 3.00, L4 - 2.00) = 2.00",
+          "explanation": "Se evalúan los arcos de salida del evento 2 (B hacia el evento 3; C hacia el evento 4). El paso atrás toma el mínimo, por lo que L2 = 2.00.",
+          "labels": {
+            "E": null,
+            "L": 2.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n2": 2.0
+            }
+          },
+          "highlight_nodes": [
+            "n2",
+            "n3"
+          ],
+          "highlight_edges": [
+            "act_B"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 17,
+          "type": "backward",
+          "node_id": "n1",
+          "formula": "L1 = min(L2 - 2.00) = 0.00",
+          "explanation": "Se evalúan los arcos de salida del evento 1 (A hacia el evento 2). El paso atrás toma el mínimo, por lo que L1 = 0.00.",
+          "labels": {
+            "E": null,
+            "L": 0.0
+          },
+          "updates": {
+            "E": {},
+            "L": {
+              "n1": 0.0
+            }
+          },
+          "highlight_nodes": [
+            "n1",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_A"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [],
+            "critical_edges": []
+          }
+        },
+        {
+          "index": 18,
+          "type": "critical",
+          "node_id": "n2",
+          "formula": "H(A) = L2 - E1 - 2.00 = 0.00",
+          "explanation": "La actividad A tiene holgura cero, por lo que no puede retrasarse sin afectar la duración total del proyecto y pertenece a la ruta crítica.",
+          "labels": {
+            "E": 0.0,
+            "L": 2.0
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1",
+            "n2"
+          ],
+          "highlight_edges": [
+            "act_A"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n3",
+              "n7",
+              "n8",
+              "n9"
+            ],
+            "critical_edges": [
+              "act_A",
+              "act_B",
+              "act_E",
+              "dummy_4",
+              "act_F"
+            ]
+          }
+        },
+        {
+          "index": 19,
+          "type": "critical",
+          "node_id": "n3",
+          "formula": "H(B) = L3 - E2 - 3.00 = 0.00",
+          "explanation": "La actividad B tiene holgura cero, por lo que no puede retrasarse sin afectar la duración total del proyecto y pertenece a la ruta crítica.",
+          "labels": {
+            "E": 2.0,
+            "L": 5.0
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n2",
+            "n3"
+          ],
+          "highlight_edges": [
+            "act_B"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n3",
+              "n7",
+              "n8",
+              "n9"
+            ],
+            "critical_edges": [
+              "act_A",
+              "act_B",
+              "act_E",
+              "dummy_4",
+              "act_F"
+            ]
+          }
+        },
+        {
+          "index": 20,
+          "type": "critical",
+          "node_id": "n7",
+          "formula": "H(E) = L7 - E3 - 3.00 = 0.00",
+          "explanation": "La actividad E tiene holgura cero, por lo que no puede retrasarse sin afectar la duración total del proyecto y pertenece a la ruta crítica.",
+          "labels": {
+            "E": 5.0,
+            "L": 8.0
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n3",
+            "n7"
+          ],
+          "highlight_edges": [
+            "act_E"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n3",
+              "n7",
+              "n8",
+              "n9"
+            ],
+            "critical_edges": [
+              "act_A",
+              "act_B",
+              "act_E",
+              "dummy_4",
+              "act_F"
+            ]
+          }
+        },
+        {
+          "index": 21,
+          "type": "critical",
+          "node_id": "n9",
+          "formula": "H(F) = L9 - E8 - 3.00 = 0.00",
+          "explanation": "La actividad F tiene holgura cero, por lo que no puede retrasarse sin afectar la duración total del proyecto y pertenece a la ruta crítica.",
+          "labels": {
+            "E": 8.0,
+            "L": 11.0
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n8",
+            "n9"
+          ],
+          "highlight_edges": [
+            "act_F"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n3",
+              "n7",
+              "n8",
+              "n9"
+            ],
+            "critical_edges": [
+              "act_A",
+              "act_B",
+              "act_E",
+              "dummy_4",
+              "act_F"
+            ]
+          }
+        },
+        {
+          "index": 22,
+          "type": "critical",
+          "node_id": null,
+          "formula": "Ruta crítica: A -> B -> E -> F (duración = 11.00)",
+          "explanation": "El conjunto de actividades con holgura cero forma la ruta crítica. Cualquier retraso en estas actividades incrementa la duración total del proyecto.",
+          "labels": {
+            "E": null,
+            "L": null
+          },
+          "updates": {
+            "E": {},
+            "L": {}
+          },
+          "highlight_nodes": [
+            "n1",
+            "n2",
+            "n3",
+            "n7",
+            "n8",
+            "n9"
+          ],
+          "highlight_edges": [
+            "act_A",
+            "act_B",
+            "act_E",
+            "dummy_4",
+            "act_F"
+          ],
+          "snapshot": {
+            "E": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 4.0,
+              "n5": 5.0,
+              "n6": 6.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "L": {
+              "n1": 0.0,
+              "n2": 2.0,
+              "n3": 5.0,
+              "n4": 7.0,
+              "n5": 7.0,
+              "n6": 8.0,
+              "n7": 8.0,
+              "n8": 8.0,
+              "n9": 11.0
+            },
+            "critical_nodes": [
+              "n1",
+              "n2",
+              "n3",
+              "n7",
+              "n8",
+              "n9"
+            ],
+            "critical_edges": [
+              "act_A",
+              "act_B",
+              "act_E",
+              "dummy_4",
+              "act_F"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

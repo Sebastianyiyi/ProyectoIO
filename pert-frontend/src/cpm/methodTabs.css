@@ -1,0 +1,54 @@
+.method-tabs-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.method-tabs-bar {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 46px;
+  padding: 5px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.method-tabs-caption {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.method-tabs-list { display: flex; gap: 4px; }
+.method-tabs-list > button {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 6px 22px;
+  background: transparent;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.method-tabs-list > button[aria-selected="true"] {
+  border-color: #c7d2fe;
+  background: #fff;
+  color: #4338ca;
+  box-shadow: 0 1px 3px #0f172a10;
+}
+.method-tabs-list > button:focus-visible { outline: 2px solid #818cf8; outline-offset: 2px; }
+.method-tab-panel { flex: 1 1 0%; min-height: 0; width: 100%; overflow: hidden; }
+.method-tab-panel[hidden] { display: none; }
+.method-tab-panel > div { height: 100%; width: 100%; }
+
+@media (max-width: 480px) {
+  .method-tabs-bar { gap: 8px; padding-inline: 12px; }
+  .method-tabs-caption { font-size: 10px; }
+  .method-tabs-list > button { padding-inline: 18px; }
+}
