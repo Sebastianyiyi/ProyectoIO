@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import router as pert_router
+from app.cpm.routes import router as cpm_router
 from app.config import get_allowed_origins
 
 app = FastAPI(
@@ -24,6 +25,7 @@ app.add_middleware(
 )
 
 app.include_router(pert_router)
+app.include_router(cpm_router)
 
 
 @app.get("/health", tags=["Sistema"])

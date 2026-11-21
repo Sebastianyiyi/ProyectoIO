@@ -1,0 +1,35 @@
+{
+  "activities": [
+    {
+      "id": "A",
+      "name": "Actividad A",
+      "predecessors": [],
+      "duration": 3
+    },
+    {
+      "id": "C",
+      "name": "Actividad C",
+      "predecessors": [
+        "A"
+      ],
+      "duration": 2
+    },
+    {
+      "id": "B",
+      "name": "Actividad B",
+      "predecessors": [
+        "A"
+      ],
+      "duration": 4
+    },
+    {
+      "id": "D",
+      "name": "Actividad D",
+      "predecessors": [
+        "B",
+        "C"
+      ],
+      "duration": 5
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "1": {
+    "activities": [
+      {
+        "id": "A",
+        "name": "Actividad A",
+        "predecessors": [],
+        "duration": 3
+      },
+      {
+        "id": "C",
+        "name": "Actividad C",
+        "predecessors": [
+          "A"
+        ],
+        "duration": 2
+      },
+      {
+        "id": "B",
+        "name": "Actividad B",
+        "predecessors": [
+          "A"
+        ],
+        "duration": 4
+      },
+      {
+        "id": "D",
+        "name": "Actividad D",
+        "predecessors": [
+          "B",
+          "C"
+        ],
+        "duration": 5
+      }
+    ]
+  },
+  "2": {
+    "activities": [
+      {
+        "id": "A",
+        "name": "Actividad A",
+        "predecessors": [],
+        "duration": 4
+      },
+      {
+        "id": "C",
+        "name": "Actividad C",
+        "predecessors": [
+          "A"
+        ],
+        "duration": 2
+      },
+      {
+        "id": "B",
+        "name": "Actividad B",
+        "predecessors": [
+          "A"
+        ],
+        "duration": 3
+      },
+      {
+        "id": "D",
+        "name": "Actividad D",
+        "predecessors": [
+          "B",
+          "C"
+        ],
+        "duration": 5
+      },
+      {
+        "id": "F",
+        "name": "Actividad F",
+        "predecessors": [
+          "D"
+        ],
+        "duration": 4
+      },
+      {
+        "id": "E",
+        "name": "Actividad E",
+        "predecessors": [
+          "D"
+        ],
+        "duration": 6
+      },
+      {
+        "id": "G",
+        "name": "Actividad G",
+        "predecessors": [
+          "F",
+          "E"
+        ],
+        "duration": 3
+      },
+      {
+        "id": "H",
+        "name": "Actividad H",
+        "predecessors": [
+          "G"
+        ],
+        "duration": 1
+      }
+    ]
+  },
+  "3": {
+    "activities": [
+      {
+        "id": "A",
+        "name": "Determinar requerimientos de los departamentos",
+        "predecessors": [],
+        "duration": 4
+      },
+      {
+        "id": "B",
+        "name": "Crear el plan financiero y de organización",
+        "predecessors": [],
+        "duration": 5
+      },
+      {
+        "id": "C",
+        "name": "Elegir locales de oficinas",
+        "predecessors": [
+          "B"
+        ],
+        "duration": 3
+      },
+      {
+        "id": "D",
+        "name": "Diseñar el local",
+        "predecessors": [
+          "A",
+          "B",
+          "C"
+        ],
+        "duration": 4
+      },
+      {
+        "id": "E",
+        "name": "Adaptar el interior del local al diseño",
+        "predecessors": [
+          "D"
+        ],
+        "duration": 8
+      },
+      {
+        "id": "F",
+        "name": "Decidir qué plantilla de empleados se necesita",
+        "predecessors": [
+          "C"
+        ],
+        "duration": 2
+      },
+      {
+        "id": "G",
+        "name": "Contratar nuevos empleados",
+        "predecessors": [
+          "F"
+        ],
+        "duration": 4
+      },
+      {
+        "id": "H",
+        "name": "Generar registros del personal",
+        "predecessors": [
+          "F"
+        ],
+        "duration": 2
+      },
+      {
+        "id": "I",
+        "name": "Comprar equipamiento",
+        "predecessors": [
+          "E"
+        ],
+        "duration": 3
+      },
+      {
+        "id": "J",
+        "name": "Entrenar al personal nuevo",
+        "predecessors": [
+          "I",
+          "G",
+          "H"
+        ],
+        "duration": 3
+      }
+    ]
+  }
+}
