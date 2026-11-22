@@ -2,6 +2,7 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
+  Database,
   GitBranch,
   LayoutGrid,
   ListOrdered,
@@ -85,7 +86,7 @@ export function CpmWorkspace({ active = true }) {
   useEffect(() => { if (!active) pauseAnimation() }, [active, pauseAnimation])
   useEffect(() => {
     if (stage !== 2) return undefined
-    const timer = setTimeout(() => setFitRequest((value) => value + 1), 150)
+    const timer = setTimeout(() => setFitRequest((value) => value + 1), 420)
     return () => clearTimeout(timer)
   }, [stage, sidebar, active])
 
@@ -260,31 +261,166 @@ export function CpmWorkspace({ active = true }) {
           </section>
         )}
 
-        {stage === 2 && <section aria-label="Red AOA CPM" className="flex h-full min-h-0 flex-col md:flex-row">
-          <aside className={`shrink-0 overflow-hidden border-r border-slate-200 bg-white ${sidebar ? 'h-[45%] w-full md:h-full md:w-[350px] xl:w-[390px]' : 'h-0 w-full md:h-full md:w-0'}`}>
-            <div className="flex h-full flex-col">
-              <h2 className="shrink-0 border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-bold uppercase tracking-wide">Actividades y procedimiento CPM</h2>
-              <div className="min-h-0 flex-1 space-y-4 overflow-auto p-3">
-                <table className="w-full text-left text-xs" aria-label="Datos iniciales CPM">
-                  <thead className="border-b border-slate-100 text-[10px] uppercase text-slate-500"><tr><th scope="col" className="px-2 py-2">Act.</th><th scope="col" className="px-2 py-2">Pred.</th><th scope="col" className="px-2 py-2 text-right">Días</th></tr></thead>
-                  <tbody className="divide-y divide-slate-100">{solver.result.activities.map((activity) => <tr key={activity.id}><td className="px-2 py-2 font-extrabold text-indigo-700">{activity.id}</td><td className="px-2 py-2 text-slate-600">{activity.predecessors.join(', ') || '—'}</td><td className="px-2 py-2 text-right font-mono">{formatDuration(activity.duration)}</td></tr>)}</tbody>
-                </table>
-                <CpmStepExplanation step={steps[animation.index]} index={animation.index} total={steps.length} />
+        {stage === 2 && (
+          <section aria-label="Red AOA CPM" className="flex h-full min-h-0 flex-col md:flex-row overflow-hidden">
+            <aside
+              id="cpm-aoa-activities-panel"
+              className={`shrink-0 border-r border-slate-200 bg-white flex flex-col overflow-hidden shadow-xs z-10 transition-all duration-300 ${
+                sidebar
+                  ? 'h-[45%] w-full md:h-full md:w-[410px] xl:w-[450px]'
+                  : 'h-0 w-full md:h-full md:w-0 border-r-0'
+              }`}
+            >
+              <div className="shrink-0 flex items-center justify-between border-b border-slate-200 bg-slate-50/70 px-4 py-2.5">
+                <div className="flex items-center gap-2">
+                  <Database className="size-4 text-indigo-600" aria-hidden="true" />
+                  <h2 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+                    Actividades
+                  </h2>
+                </div>
+                <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-600">
+                  Paso 02
+                </span>
               </div>
-              <div className="flex shrink-0 justify-between gap-2 border-t border-slate-200 p-3">
-                <button type="button" onClick={() => setStage(1)} className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-2 text-xs font-semibold"><ArrowLeft className="size-3.5" /> Configuración</button>
-                <button type="button" onClick={() => setStage(3)} className="inline-flex items-center gap-1 rounded-lg bg-indigo-600 px-2.5 py-2 text-xs font-bold text-white">Resultados <ArrowRight className="size-3.5" /></button>
+
+              <div className="min-h-0 flex-1 overflow-y-auto p-3.5 space-y-4">
+                <section className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 bg-slate-50/70 px-4 py-2.5">
+                    <h3 className="text-xs font-bold uppercase tracking-wide text-slate-700">
+                      Actividades
+                    </h3>
+                    <span className="inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-0.5 text-[11px] font-bold text-indigo-700 ring-1 ring-inset ring-indigo-200/60">
+                      {solver.result.activities.length}{' '}
+                      {solver.result.activities.length === 1 ? 'actividad' : 'actividades'}
+                    </span>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-sm" aria-label="Datos iniciales CPM">
+                      <thead className="bg-slate-50 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                        <tr>
+                          <th scope="col" className="px-4 py-2.5 text-center w-16">
+                            Act.
+                          </th>
+                          <th scope="col" className="px-4 py-2.5">
+                            Predecesores
+                          </th>
+                          <th scope="col" className="px-4 py-2.5 text-right w-20">
+                            Días
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {solver.result.activities.map((activity) => (
+                          <tr key={activity.id} className="transition-colors hover:bg-slate-50/80">
+                            <td className="px-4 py-2 text-center">
+                              <span className="inline-grid size-7 place-items-center rounded-lg bg-indigo-50 text-xs font-bold text-indigo-700 ring-1 ring-inset ring-indigo-200/60">
+                                {activity.id}
+                              </span>
+                            </td>
+                            <td className="px-4 py-2">
+                              {activity.predecessors.length > 0 ? (
+                                <div className="flex flex-wrap gap-1">
+                                  {activity.predecessors.map((predecessor) => (
+                                    <span
+                                      key={predecessor}
+                                      className="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 ring-1 ring-inset ring-slate-200"
+                                    >
+                                      {predecessor}
+                                    </span>
+                                  ))}
+                                </div>
+                              ) : (
+                                <span className="text-xs font-medium text-slate-400">
+                                  — Inicio
+                                </span>
+                              )}
+                            </td>
+                            <td className="px-4 py-2 text-right font-mono text-xs font-semibold text-slate-700">
+                              {formatDuration(activity.duration)}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <CpmStepExplanation
+                  step={steps[animation.index]}
+                  index={animation.index}
+                  total={steps.length}
+                />
               </div>
+
+              <div className="shrink-0 border-t border-slate-200 bg-slate-50/80 p-3 flex items-center justify-between gap-2">
+                <button
+                  type="button"
+                  onClick={() => setStage(1)}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-2xs hover:bg-slate-50 transition"
+                >
+                  <ArrowLeft className="size-3.5" aria-hidden="true" />
+                  <span>Configuración (P1)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setStage(3)}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-indigo-500 transition"
+                >
+                  <span>Resultados (P3)</span>
+                  <ArrowRight className="size-3.5" aria-hidden="true" />
+                </button>
+              </div>
+            </aside>
+
+            <div className="flex-1 h-full min-h-0 min-w-0 bg-slate-100/70 relative flex flex-col overflow-hidden">
+              <CpmGraph
+                result={solver.result}
+                step={steps[animation.index]}
+                loading={solver.loading}
+                executionMode={mode}
+                onExecutionModeChange={setMode}
+                fitRequest={fitRequest}
+                headerActions={
+                  <button
+                    type="button"
+                    onClick={() => setSidebar((value) => !value)}
+                    aria-expanded={sidebar}
+                    aria-controls="cpm-aoa-activities-panel"
+                    title={sidebar ? 'Ocultar tabla de actividades' : 'Mostrar tabla de actividades'}
+                    aria-label={sidebar ? 'Ocultar tabla de actividades' : 'Mostrar tabla de actividades'}
+                    className="inline-flex h-8 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-semibold text-slate-600 shadow-sm transition hover:bg-slate-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300"
+                  >
+                    {sidebar ? (
+                      <PanelLeftClose className="size-4" aria-hidden="true" />
+                    ) : (
+                      <PanelLeftOpen className="size-4" aria-hidden="true" />
+                    )}
+                    <span className="hidden xl:inline">
+                      {sidebar ? 'Ocultar tabla' : 'Mostrar tabla'}
+                    </span>
+                  </button>
+                }
+                topLeft={<GraphLegend showDimmed={mode === 'focus'} />}
+                topRight={
+                  <AnimationControls
+                    index={animation.index}
+                    total={steps.length}
+                    isPlaying={animation.isPlaying}
+                    isFirst={animation.isFirst}
+                    isLast={animation.isLast}
+                    speed={speed}
+                    onSpeedChange={setSpeed}
+                    onPrev={animation.prev}
+                    onNext={animation.next}
+                    onTogglePlay={animation.togglePlay}
+                    onReset={animation.reset}
+                    onGoToFinal={animation.goToFinal}
+                  />
+                }
+              />
             </div>
-          </aside>
-          <div className="min-h-0 min-w-0 flex-1">
-            <CpmGraph result={solver.result} step={steps[animation.index]} loading={solver.loading} executionMode={mode} onExecutionModeChange={setMode} fitRequest={fitRequest}
-              headerActions={<button type="button" onClick={() => setSidebar((value) => !value)} aria-label={sidebar ? 'Ocultar actividades CPM' : 'Mostrar actividades CPM'} className="rounded-lg border border-slate-200 bg-white p-2 text-slate-600">{sidebar ? <PanelLeftClose className="size-4" /> : <PanelLeftOpen className="size-4" />}</button>}
-              topLeft={<GraphLegend showDimmed={mode === 'focus'} />}
-              topRight={<AnimationControls index={animation.index} total={steps.length} isPlaying={animation.isPlaying} isFirst={animation.isFirst} isLast={animation.isLast} speed={speed} onSpeedChange={setSpeed} onPrev={animation.prev} onNext={animation.next} onTogglePlay={animation.togglePlay} onReset={animation.reset} onGoToFinal={animation.goToFinal} />}
-            />
-          </div>
-        </section>}
+          </section>
+        )}
 
         {stage === 3 && <CpmResults result={solver.result} onPrev={() => setStage(2)} onNext={() => setStage(4)} />}
         {stage === 4 && <CpmExecutiveReport result={solver.result} onPrev={() => setStage(3)} onReset={() => setStage(1)} />}
