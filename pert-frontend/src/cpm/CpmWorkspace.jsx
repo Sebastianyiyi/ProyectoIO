@@ -224,13 +224,20 @@ export function CpmWorkspace({ active = true }) {
         </div>
       </header>
 
-      <main className="min-h-0 flex-1 overflow-hidden">
-        {stage === 1 && (
-          <section
-            aria-label="Configuración CPM"
-            className="h-full overflow-y-auto p-4 sm:p-6 flex flex-col items-center justify-start"
+      <main className="flex-1 w-full overflow-hidden relative">
+        <div
+          className="flex h-full w-[400%] transition-transform duration-400 ease-in-out"
+          style={{
+            transform: `translateX(-${(stage - 1) * 25}%)`,
+            transitionDuration: '400ms',
+          }}
+        >
+          <div
+            aria-hidden={stage !== 1}
+            inert={stage !== 1}
+            className="w-1/4 h-full overflow-y-auto p-4 sm:p-6 flex flex-col items-center justify-start"
           >
-            <div className="w-full max-w-4xl space-y-4 my-auto py-2">
+            <section aria-label="Configuración CPM" className="w-full max-w-4xl space-y-4 my-auto py-2">
               <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200">
@@ -257,12 +264,14 @@ export function CpmWorkspace({ active = true }) {
                   onClear={clear}
                 />
               </div>
-            </div>
-          </section>
-        )}
+            </section>
+          </div>
 
-        {stage === 2 && (
-          <section aria-label="Red AOA CPM" className="flex h-full min-h-0 flex-col md:flex-row overflow-hidden">
+          <div
+            aria-hidden={stage !== 2}
+            inert={stage !== 2}
+            className="w-1/4 h-full flex flex-col md:flex-row overflow-hidden border-r border-slate-200"
+          >
             <aside
               id="cpm-aoa-activities-panel"
               className={`shrink-0 border-r border-slate-200 bg-white flex flex-col overflow-hidden shadow-xs z-10 transition-all duration-300 ${
@@ -290,8 +299,10 @@ export function CpmWorkspace({ active = true }) {
                       Actividades
                     </h3>
                     <span className="inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-0.5 text-[11px] font-bold text-indigo-700 ring-1 ring-inset ring-indigo-200/60">
-                      {solver.result.activities.length}{' '}
-                      {solver.result.activities.length === 1 ? 'actividad' : 'actividades'}
+                      {(solver.result?.activities ?? solver.activities).length}{' '}
+                      {(solver.result?.activities ?? solver.activities).length === 1
+                        ? 'actividad'
+                        : 'actividades'}
                     </span>
                   </div>
                   <div className="overflow-x-auto">
@@ -310,7 +321,7 @@ export function CpmWorkspace({ active = true }) {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
-                        {solver.result.activities.map((activity) => (
+                        {(solver.result?.activities ?? []).map((activity) => (
                           <tr key={activity.id} className="transition-colors hover:bg-slate-50/80">
                             <td className="px-4 py-2 text-center">
                               <span className="inline-grid size-7 place-items-center rounded-lg bg-indigo-50 text-xs font-bold text-indigo-700 ring-1 ring-inset ring-indigo-200/60">
@@ -345,11 +356,13 @@ export function CpmWorkspace({ active = true }) {
                   </div>
                 </section>
 
-                <CpmStepExplanation
-                  step={steps[animation.index]}
-                  index={animation.index}
-                  total={steps.length}
-                />
+                {steps[animation.index] ? (
+                  <CpmStepExplanation
+                    step={steps[animation.index]}
+                    index={animation.index}
+                    total={steps.length}
+                  />
+                ) : null}
               </div>
 
               <div className="shrink-0 border-t border-slate-200 bg-slate-50/80 p-3 flex items-center justify-between gap-2">
@@ -364,7 +377,8 @@ export function CpmWorkspace({ active = true }) {
                 <button
                   type="button"
                   onClick={() => setStage(3)}
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-indigo-500 transition"
+                  disabled={!solver.result}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-indigo-500 transition disabled:opacity-40"
                 >
                   <span>Resultados (P3)</span>
                   <ArrowRight className="size-3.5" aria-hidden="true" />
@@ -373,57 +387,72 @@ export function CpmWorkspace({ active = true }) {
             </aside>
 
             <div className="flex-1 h-full min-h-0 min-w-0 bg-slate-100/70 relative flex flex-col overflow-hidden">
-              <CpmGraph
-                result={solver.result}
-                step={steps[animation.index]}
-                loading={solver.loading}
-                executionMode={mode}
-                onExecutionModeChange={setMode}
-                fitRequest={fitRequest}
-                headerActions={
-                  <button
-                    type="button"
-                    onClick={() => setSidebar((value) => !value)}
-                    aria-expanded={sidebar}
-                    aria-controls="cpm-aoa-activities-panel"
-                    title={sidebar ? 'Ocultar tabla de actividades' : 'Mostrar tabla de actividades'}
-                    aria-label={sidebar ? 'Ocultar tabla de actividades' : 'Mostrar tabla de actividades'}
-                    className="inline-flex h-8 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-semibold text-slate-600 shadow-sm transition hover:bg-slate-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300"
-                  >
-                    {sidebar ? (
-                      <PanelLeftClose className="size-4" aria-hidden="true" />
-                    ) : (
-                      <PanelLeftOpen className="size-4" aria-hidden="true" />
-                    )}
-                    <span className="hidden xl:inline">
-                      {sidebar ? 'Ocultar tabla' : 'Mostrar tabla'}
-                    </span>
-                  </button>
-                }
-                topLeft={<GraphLegend showDimmed={mode === 'focus'} />}
-                topRight={
-                  <AnimationControls
-                    index={animation.index}
-                    total={steps.length}
-                    isPlaying={animation.isPlaying}
-                    isFirst={animation.isFirst}
-                    isLast={animation.isLast}
-                    speed={speed}
-                    onSpeedChange={setSpeed}
-                    onPrev={animation.prev}
-                    onNext={animation.next}
-                    onTogglePlay={animation.togglePlay}
-                    onReset={animation.reset}
-                    onGoToFinal={animation.goToFinal}
-                  />
-                }
-              />
+              {solver.result ? (
+                <CpmGraph
+                  result={solver.result}
+                  step={steps[animation.index]}
+                  loading={solver.loading}
+                  executionMode={mode}
+                  onExecutionModeChange={setMode}
+                  fitRequest={fitRequest}
+                  headerActions={
+                    <button
+                      type="button"
+                      onClick={() => setSidebar((value) => !value)}
+                      aria-expanded={sidebar}
+                      aria-controls="cpm-aoa-activities-panel"
+                      title={sidebar ? 'Ocultar tabla de actividades' : 'Mostrar tabla de actividades'}
+                      aria-label={sidebar ? 'Ocultar tabla de actividades' : 'Mostrar tabla de actividades'}
+                      className="inline-flex h-8 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-semibold text-slate-600 shadow-sm transition hover:bg-slate-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300"
+                    >
+                      {sidebar ? (
+                        <PanelLeftClose className="size-4" aria-hidden="true" />
+                      ) : (
+                        <PanelLeftOpen className="size-4" aria-hidden="true" />
+                      )}
+                      <span className="hidden xl:inline">
+                        {sidebar ? 'Ocultar tabla' : 'Mostrar tabla'}
+                      </span>
+                    </button>
+                  }
+                  topLeft={<GraphLegend showDimmed={mode === 'focus'} />}
+                  topRight={
+                    <AnimationControls
+                      index={animation.index}
+                      total={steps.length}
+                      isPlaying={animation.isPlaying}
+                      isFirst={animation.isFirst}
+                      isLast={animation.isLast}
+                      speed={speed}
+                      onSpeedChange={setSpeed}
+                      onPrev={animation.prev}
+                      onNext={animation.next}
+                      onTogglePlay={animation.togglePlay}
+                      onReset={animation.reset}
+                      onGoToFinal={animation.goToFinal}
+                    />
+                  }
+                />
+              ) : null}
             </div>
-          </section>
-        )}
+          </div>
 
-        {stage === 3 && <CpmResults result={solver.result} onPrev={() => setStage(2)} onNext={() => setStage(4)} />}
-        {stage === 4 && <CpmExecutiveReport result={solver.result} onPrev={() => setStage(3)} onReset={() => setStage(1)} />}
+          <div
+            aria-hidden={stage !== 3}
+            inert={stage !== 3}
+            className="w-1/4 h-full overflow-hidden bg-slate-50"
+          >
+            <CpmResults result={solver.result} onPrev={() => setStage(2)} onNext={() => setStage(4)} />
+          </div>
+
+          <div
+            aria-hidden={stage !== 4}
+            inert={stage !== 4}
+            className="w-1/4 h-full overflow-hidden bg-slate-50"
+          >
+            <CpmExecutiveReport result={solver.result} onPrev={() => setStage(3)} onReset={() => setStage(1)} />
+          </div>
+        </div>
       </main>
 
       <ErrorModal open={messages.length > 0 && dismissed !== errorKey} title="Revisa el proyecto CPM" messages={messages} onClose={() => setDismissed(errorKey)} />

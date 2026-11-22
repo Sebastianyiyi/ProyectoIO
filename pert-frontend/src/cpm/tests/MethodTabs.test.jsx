@@ -77,11 +77,13 @@ describe('Separate PERT and CPM workspaces', () => {
     fireEvent.click(cpm.getByRole('button', { name: 'Ir al resultado final', exact: true }))
     expect(cpm.getByLabelText('Explicación del paso CPM')).toHaveTextContent('A -> B -> D')
     fireEvent.click(cpm.getByRole('button', { name: /Tiempos y holguras CPM/ }))
-    expect(cpm.getByRole('table', { name: 'Actividades y holguras CPM' })).toHaveTextContent('f1')
-    expect(cpm.getByText('12,0 días')).toBeVisible()
+    const resultsRegion = cpm.getByRole('region', { name: 'Tiempos y holguras CPM' })
+    expect(within(resultsRegion).getByRole('table', { name: 'Actividades y holguras CPM' })).toHaveTextContent('f1')
+    expect(within(resultsRegion).getByText('12,0 días')).toBeVisible()
     fireEvent.click(cpm.getByRole('button', { name: /Resumen CPM/ }))
-    expect(cpm.getByLabelText('Ruta crítica CPM 1')).toHaveTextContent('A→B→D')
-    expect(cpm.getByText('12,0 días')).toBeVisible()
+    const summaryRegion = cpm.getByRole('region', { name: 'Resumen CPM' })
+    expect(within(summaryRegion).getByLabelText('Ruta crítica CPM 1')).toHaveTextContent('A→B→D')
+    expect(within(summaryRegion).getByText('12,0 días')).toBeVisible()
   })
 
   it('validates a negative CPM duration without calling its API', async () => {

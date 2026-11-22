@@ -2,11 +2,11 @@ import { ArrowLeft, Clock, RotateCcw, Route } from 'lucide-react'
 import { formatDuration } from '../../lib/format'
 
 export function CpmExecutiveReport({ result, onPrev, onReset }) {
-  if (!result) return <p className="p-8 text-center text-sm text-slate-500">Calcula un proyecto CPM para consultar su resumen.</p>
+  if (!result) return <section aria-label="Resumen CPM" className="p-8 text-center text-sm text-slate-500">Calcula un proyecto CPM para consultar su resumen.</section>
   const critical = result.activities.filter((activity) => activity.is_critical)
   const paths = result.critical_paths
   return (
-    <div className="mx-auto flex h-full w-full max-w-6xl flex-col gap-5 overflow-auto p-4 sm:p-7">
+    <section aria-label="Resumen CPM" className="mx-auto flex h-full w-full max-w-6xl flex-col gap-5 overflow-auto p-4 sm:p-7">
       <div className="border-b border-slate-200 pb-3">
         <p className="text-[10px] font-black uppercase tracking-wider text-indigo-700">Paso 04 · CPM</p>
         <h2 className="mt-1 text-xl font-black text-slate-900">Resumen Ejecutivo CPM</h2>
@@ -35,6 +35,6 @@ export function CpmExecutiveReport({ result, onPrev, onReset }) {
         <button type="button" onClick={onPrev} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-700"><ArrowLeft className="size-4" /> Anterior: tiempos y holguras</button>
         <button type="button" onClick={onReset} className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white"><RotateCcw className="size-4" /> Volver a configuración CPM</button>
       </div>
-    </div>
+    </section>
   )
 }
