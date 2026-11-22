@@ -25,13 +25,14 @@ import {
 } from '../../lib/graphView'
 import { ExecutionModeSwitch } from '../../components/ExecutionModeSwitch'
 import { GraphToolbar } from '../../components/GraphToolbar'
+import { curveCpmSkipEdges, expandCpmParallelNodes } from '../lib/cpmGraphLayout'
 
 const DAGRE_LAYOUT = {
   name: 'dagre',
   rankDir: 'LR',
-  rankSep: 120,
-  nodeSep: 80,
-  edgeSep: 20,
+  rankSep: 140,
+  nodeSep: 120,
+  edgeSep: 36,
   animate: false,
   fit: false,
 }
@@ -209,7 +210,9 @@ export function CpmGraph({
     cyRef.current = cy
     cy.resize()
     runLayout(cy)
+    expandCpmParallelNodes(cy)
     applyEdgeLabelLayout(cy)
+    curveCpmSkipEdges(cy)
     applyStepToGraph(cy, stepRef.current, {
       result,
       mode: modeRef.current,
